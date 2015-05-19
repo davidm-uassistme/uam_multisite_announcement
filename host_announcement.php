@@ -31,11 +31,12 @@ function uam_announcement_add_bar () {
 	    $bgColor = get_site_option("bar_bg_color_$blogId");
 	    $color = get_site_option("default_text_color_$blogId");
 	    $borderColor = get_site_option("border_color_$blogId");
+	    $borderWidth = get_site_option("border_width_for_$blogId");
 		?>
 	    <script>
 	        function uam_main () {
 	            var page = document.getElementsByTagName('body')[0];
-	            page.innerHTML += '<span id="uam_announcement_bar" style="color:<?php echo $color; ?>;background-color:<?php echo $bgColor;?>;border-top: solid 3px <?php echo $borderColor; ?>;"><?php echo $content; ?></span>';
+	            page.innerHTML += '<span id="uam_announcement_bar" style="color:<?php echo $color; ?>;background-color:<?php echo $bgColor;?>;border-top: solid <?php echo $borderWidth; ?> <?php echo $borderColor; ?>;"><?php echo $content; ?></span>';
 	        }
 	        document.onload = uam_main();
 	    </script>

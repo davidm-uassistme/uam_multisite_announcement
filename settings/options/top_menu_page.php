@@ -54,6 +54,12 @@ foreach(wp_get_sites() as $site) :
 		'label' => 'Border Color'
 		);
 
+	$fields[] = array(
+		'type' => 'text',
+		'name' => 'border_width_for_'.$blogId,
+		'label' => 'Border Width',
+		'value' => '3px'
+		);
 	$settings['<span style="font-size:20px">Options for <b style="color:#dd3333;text-transform:uppercase">' . $siteName . '</b></span>']['fields'] = $fields;
 endforeach;
 
