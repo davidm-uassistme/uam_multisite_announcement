@@ -2,12 +2,12 @@
 
 $page = new Page('Announcements', array('type' => 'menu'));
 
-$settings['General Plugin State (On/Off)'] = array('info' => 'Plugin State');
+$settings['General Plugin State (On/Off)'] = array('info' => 'Select the general plugin state On or Off');
 
 $fields = array();
 $fields[] = array(
 	'type' 	=> 'checkbox',
-	'name' 	=> 'plugin_state',
+	'name' 	=> 'uam_announcement_plugin_state',
 	'label' => 'On/Off'
 );
 
@@ -20,9 +20,16 @@ foreach(wp_get_sites() as $site) :
 	$siteName = get_blog_details($site['blog_id'])->blogname;
 	$blogId = get_blog_details($site['blog_id'])->blog_id;
 
-	$settings['Options for ' . $siteName] = array('info' => 'Section one information.');
+	$settings['Options for <b style="color:#dd3333;text-transform:uppercase">' . $siteName . '</b>'] = array('info' => 'Select Settings for this Announcement Bar');
 
 	$fields = array();
+	$fields[] = array(
+		'type' 	=> 'checkbox',
+		'name' 	=> 'bar_state_for_'.$blogId,
+		'label' => 'Bar State (On/Off)',
+		'value' => '1'
+	);
+
 	$fields[] = array(
 		'type' 	=> 'editor',
 		'name' 	=> 'editor_for_'.$blogId,
@@ -47,7 +54,13 @@ foreach(wp_get_sites() as $site) :
 		'label' => 'Border Color'
 		);
 
-	$settings['Options for ' . $siteName]['fields'] = $fields;
+	$fields[] = array(
+		'type' => 'text',
+		'name' => 'border_width_for_'.$blogId,
+		'label' => 'Border Width',
+		'value' => '3px'
+		);
+	$settings['<span style="font-size:20px">Options for <b style="color:#dd3333;text-transform:uppercase">' . $siteName . '</b></span>']['fields'] = $fields;
 endforeach;
 
 new OptionPageBuilderSingle($page, $settings);

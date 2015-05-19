@@ -23,19 +23,20 @@ add_action('wp_footer', 'uam_announcement_add_bar');
 
 function uam_announcement_add_bar () {
 	$pluginState = get_site_option('uam_announcement_plugin_state');
-    
-    if (is_user_logged_in() && checked($pluginState)) :
-	    $blogId = get_blog_details()->blog_id;
+    $blogId = get_blog_details()->blog_id;
+    $barState = get_site_option("bar_state_for_$blogId");
+
+    if (is_user_logged_in() && checked($pluginState) && checked($barState)) :
 	    $content = get_site_option("editor_for_$blogId");
 	    $bgColor = get_site_option("bar_bg_color_$blogId");
 	    $color = get_site_option("default_text_color_$blogId");
 	    $borderColor = get_site_option("border_color_$blogId");
+	    $borderWidth = get_site_option("border_width_for_$blogId");
 		?>
-
 	    <script>
 	        function uam_main () {
 	            var page = document.getElementsByTagName('body')[0];
-	            page.innerHTML += '<span id="uam_announcement_bar" style="color:<?php echo $color; ?>;background-color:<?php echo $bgColor;?>;border-top: solid 3px <?php echo $borderColor; ?>;"><?php echo $content; ?></span>';
+	            page.innerHTML += '<span id="uam_announcement_bar" style="color:<?php echo $color; ?>;background-color:<?php echo $bgColor;?>;border-top: solid <?php echo $borderWidth; ?> <?php echo $borderColor; ?>;"><?php echo $content; ?></span>';
 	        }
 	        document.onload = uam_main();
 	    </script>
