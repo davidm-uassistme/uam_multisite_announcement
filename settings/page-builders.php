@@ -21,7 +21,7 @@ class OptionPageBuilder {
 	{
 		// Initialize page and register page action
 		$this->page = $page;
-		add_action('admin_menu', array($this, 'register_page'));
+		add_action('network_admin_menu', array($this, 'register_page'));
 
 		// Add user supplied scripts for this page
 		$this->scripts = $scripts;
@@ -50,7 +50,7 @@ class OptionPageBuilder {
 				add_submenu_page( $this->page->parent_slug, $this->page->title, $this->page->menu_title, $this->page->capability, $this->page->slug, array($this, 'render') );
 				break;
 			case 'settings':
-				add_options_page( $this->page->title, $this->page->menu_title, $this->page->capability, $this->page->slug, array($this, 'render') );
+				add_site_options_page( $this->page->title, $this->page->menu_title, $this->page->capability, $this->page->slug, array($this, 'render') );
 				$this->page->set_hook('settings_page_');
 				break;
 			default:

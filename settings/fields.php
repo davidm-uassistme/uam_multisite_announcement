@@ -44,7 +44,7 @@ class Field {
 		}	
 
 		// Get option saved value
-		$value = get_option($this->name);
+		$value = get_site_option($this->name);
 
 		if( $value === false ) {	
 
@@ -219,7 +219,7 @@ class Checkbox extends Field {
 		if( $markup == '' ) {
 						
 			// Display setting checked when 1
-			if($this->value == 1) {
+			if($this->value === 1) {
 				$checked = 'checked=checked';
 			} else {
 				$checked = '';
