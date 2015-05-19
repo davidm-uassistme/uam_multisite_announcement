@@ -156,10 +156,10 @@ class SettingsFactory {
 						if(!empty($field->reset_value)) {
 													
 							// Update to reset value if there is one
-							update_site_option($field->name, $field->reset_value);
+							update_option($field->name, $field->reset_value);
 						} else {
 
-							delete_site_option($field->name);
+							delete_option($field->name);
 						}
 
 						// Update screen values
